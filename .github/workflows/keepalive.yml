@@ -2,7 +2,7 @@ name: "Keep-Alive"
 
 on:
   schedule:
-    - cron: "42 0 1 * *"
+    - cron: "*/30 * * * *"
 
 jobs:
   keep_alive:
