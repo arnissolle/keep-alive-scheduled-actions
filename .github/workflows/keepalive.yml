@@ -25,5 +25,6 @@ jobs:
           git commit -m "Keep-Alive"
           git push origin master
         else
-          echo "Oops, seems the keep-alive failed!";
+          echo "Oops, seems the keep-alive failed!"
+          exit 1
         fi
