@@ -2,14 +2,15 @@ name: "Keep-Alive"
 on:
   push:
   schedule:
-    - cron: "*/30 * * * *"
+    - cron: "42 0 1 * *"
 jobs:
   keep_alive:
     runs-on: ubuntu-latest
     steps:
     - name: Checkout the default branch
       uses: actions/checkout@v2
-    - run: |
+    - name: Set env variables
+      run: |
         echo "CURRENT_BRANCH=$(git branch --show-current)" >> $GITHUB_ENV
         echo "CURRENT_DATETIME=$(date '+%B %d, %Y %T (%Z)')" >> $GITHUB_ENV
     - name: Add or update the keep-alive
