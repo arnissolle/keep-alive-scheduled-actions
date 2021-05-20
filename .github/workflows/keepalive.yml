@@ -12,12 +12,12 @@ jobs:
     - run: |
         echo "CURRENT_BRANCH=$(git branch --show-current)" >> $GITHUB_ENV
         echo "KEEP_ALIVE_DATE=$(date '+%B %d, %Y %T (%Z)')" >> $GITHUB_ENV
-        echo "KEEP_ALIVE_MESSAGE='Sill alive on ${KEEP_ALIVE_DATE}'" >> $GITHUB_ENV
+        echo "KEEP_ALIVE_MESSAGE=Sill alive on ${KEEP_ALIVE_DATE}" >> $GITHUB_ENV
     - name: Add or update the keep-alive
       run: |
         cat >.keepalive <<EOL
         Keep-Alive strategy...
-        Still alive on $KEEP_ALIVE_MESSAGE
+        $KEEP_ALIVE_MESSAGE
         EOL
     - name: Commit the keep-alive
       run: |
