@@ -1,6 +1,7 @@
 name: "Keep-Alive"
 
 on:
+  push:
   schedule:
     - cron: "*/30 * * * *"
 
