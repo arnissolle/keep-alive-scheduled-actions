@@ -11,13 +11,12 @@ jobs:
       uses: actions/checkout@v2
     - run: |
         echo "CURRENT_BRANCH=$(git branch --show-current)" >> $GITHUB_ENV
-        echo "KEEP_ALIVE_DATETIME=$(date '+%B %d, %Y %T (%Z)')" >> $GITHUB_ENV
-        echo "KEEP_ALIVE_MESSAGE=\"Sill alive on $KEEP_ALIVE_DATETIME\"" >> $GITHUB_ENV
+        echo "CURRENT_DATETIME=$(date '+%B %d, %Y %T (%Z)')" >> $GITHUB_ENV
     - name: Add or update the keep-alive
       run: |
         cat >.keepalive <<EOL
         Keep-Alive strategy...
-        $KEEP_ALIVE_MESSAGE
+        Still alive on $CURRENT_DATETIME
         EOL
     - name: Commit the keep-alive
       run: |
@@ -25,7 +24,7 @@ jobs:
         git config --local user.name "GitHub Actions"
         if [ -n "$(git status --porcelain)" ]; then
           git add .
-          git commit -m "Keep-Alive"
+          git commit -m "Still alive on $CURRENT_DATETIME"
           git push origin $CURRENT_BRANCH
         else
           echo "Oops, seems the keep-alive failed!"
