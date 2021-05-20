@@ -5,7 +5,7 @@ on:
     - cron: "42 * * * *"
 
 jobs:
-  build:
+  keep_alive:
     runs-on: ubuntu-latest
     steps:
     - name: Checkout…
