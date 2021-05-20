@@ -8,20 +8,21 @@ jobs:
   keep_alive:
     runs-on: ubuntu-latest
     steps:
-    - name: Checkout…
+    - name: Checkout the default branch
       uses: actions/checkout@v2
     - name: Add or update the keep-alive
       run: |
         cat >.keepalive <<EOL
-        $(date '%B %d, %Y %T (%Z)')
+        Keep-Alive strategy...
+        Updated on $(date '+%B %d, %Y %T (%Z)')
         EOL
-    - name: Commit files
+    - name: Commit the keep-alive
       run: |
         git config --local user.email "actions@github.com"
         git config --local user.name "GitHub Actions"
         if [ -n "$(git status --porcelain)" ]; then
           git add .
-          git commit -m "Keep-Alive!"
+          git commit -m "Keep-Alive"
           git push origin master
         else
           echo "Oops, seems the keep-alive failed!";
