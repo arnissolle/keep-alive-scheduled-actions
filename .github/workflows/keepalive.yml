@@ -9,8 +9,9 @@ jobs:
     steps:
     - name: Checkout the default branch
       uses: actions/checkout@v2
+    - run: echo "CURRENT_BRANCH=$(git branch --show-current)" >> $GITHUB_ENV
     - name: Current branch…
-      run: echo "On branch $GITHUB_REF"
+      run: echo "On branch $CURRENT_BRANCH"
     - name: Add or update the keep-alive
       run: |
         cat >.keepalive <<EOL
@@ -24,7 +25,7 @@ jobs:
         if [ -n "$(git status --porcelain)" ]; then
           git add .
           git commit -m "Keep-Alive"
-          git push origin master
+          git push origin $CURRENT_BRANCH
         else
           echo "Oops, seems the keep-alive failed!"
           exit 1
