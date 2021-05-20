@@ -10,6 +10,8 @@ jobs:
     steps:
     - name: Checkout the default branch
       uses: actions/checkout@v2
+    - name: Current branch…
+      run: echo "On branch $GITHUB_REF"
     - name: Add or update the keep-alive
       run: |
         cat >.keepalive <<EOL
