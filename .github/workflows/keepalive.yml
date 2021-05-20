@@ -10,13 +10,13 @@ jobs:
     - name: Checkout the default branch
       uses: actions/checkout@v2
     - run: echo "CURRENT_BRANCH=$(git branch --show-current)" >> $GITHUB_ENV
-    - name: Current branch…
-      run: echo "On branch $CURRENT_BRANCH"
+    - run: echo "KEEP_ALIVE_DATE=$(date '+%B %d, %Y %T (%Z)')" >> $GITHUB_ENV
+    - run: echo "KEEP_ALIVE_MESSAGE=$(echo \"Sill alive on $KEEP_ALIVE_DATE\"" >> $GITHUB_ENV
     - name: Add or update the keep-alive
       run: |
         cat >.keepalive <<EOL
         Keep-Alive strategy...
-        Updated on $(date '+%B %d, %Y %T (%Z)')
+        Still alive on $KEEP_ALIVE_MESSAGE
         EOL
     - name: Commit the keep-alive
       run: |
