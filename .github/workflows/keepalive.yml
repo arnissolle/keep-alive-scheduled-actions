@@ -1,10 +1,8 @@
 name: "Keep-Alive"
-
 on:
   push:
   schedule:
     - cron: "*/30 * * * *"
-
 jobs:
   keep_alive:
     runs-on: ubuntu-latest
