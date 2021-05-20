@@ -9,6 +9,10 @@ jobs:
     steps:
     - name: Checkout the default branch
       uses: actions/checkout@v2
+    - run: |
+        echo "CURRENT_BRANCH=$(git branch --show-current)" >> $GITHUB_ENV
+        echo "KEEP_ALIVE_DATE=$(date '+%B %d, %Y %T (%Z)')" >> $GITHUB_ENV
+        echo "KEEP_ALIVE_MESSAGE='Sill alive on ${{ env.KEEP_ALIVE_DATE }}'" >> $GITHUB_ENV
     - run: echo "CURRENT_BRANCH=$(git branch --show-current)" >> $GITHUB_ENV
     - run: echo "KEEP_ALIVE_DATE=$(date '+%B %d, %Y %T (%Z)')" >> $GITHUB_ENV
     - run: echo "KEEP_ALIVE_MESSAGE=$(echo \"Sill alive on $KEEP_ALIVE_DATE\"" >> $GITHUB_ENV
