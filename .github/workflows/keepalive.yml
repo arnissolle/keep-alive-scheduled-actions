@@ -7,26 +7,17 @@ jobs:
   keep_alive:
     runs-on: ubuntu-latest
     steps:
-    - name: Checkout the default branch
-      uses: actions/checkout@v2
-    - name: Set env variables
-      run: |
-        echo "CURRENT_BRANCH=$(git branch --show-current)" >> $GITHUB_ENV
-        echo "CURRENT_DATETIME=$(date '+%B %d, %Y %T (%Z)')" >> $GITHUB_ENV
-    - name: Add or update the keep-alive
-      run: |
-        cat >.keepalive <<EOL
-        Keep-Alive strategy...
-        Still alive on $CURRENT_DATETIME
-        EOL
-    - name: Commit the keep-alive
+    - uses: actions/checkout@v2
+    - name: Add or update .keepalive
+      run: echo $(date +'%s') > .keepalive
+    - name: Commit .keepalive
       run: |
         git config --local user.email "actions@github.com"
         git config --local user.name "GitHub Actions"
         if [ -n "$(git status --porcelain)" ]; then
           git add .
-          git commit -m "Still alive on $CURRENT_DATETIME"
-          git push origin $CURRENT_BRANCH
+          git commit -m "Still alive on $(date +'%B %d, %Y %T (%Z)')"
+          git push origin $(git branch --show-current)
         else
           echo "Oops, seems the keep-alive failed!"
           exit 1
