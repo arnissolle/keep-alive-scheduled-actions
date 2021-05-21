@@ -1,5 +1,6 @@
-name: "Keep-Alive"
+name: Keep-Alive
 on:
+  push:
   schedule:
     - cron: "42 0 1 * *"
 jobs:
